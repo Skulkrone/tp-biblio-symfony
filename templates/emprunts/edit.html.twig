@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un emprunt{% endblock %}
+
+{% block body %}
+    <h2>Modifier un emprunt</h2>
+
+    {{ include('emprunts/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    <div>
+        <a href="{{ path('emprunts_index') }}">Retour à la liste</a>
+    </div>
+    {{ include('emprunts/_delete_form.html.twig') }}
+{% endblock %}

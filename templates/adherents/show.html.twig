@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adherents{% endblock %}
+
+{% block body %}
+    <h1>Adherents</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ adherent.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ adherent.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ adherent.prenom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('adherents_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('adherents_edit', {'id': adherent.id}) }}">Modifier</a>
+
+    {{ include('adherents/_delete_form.html.twig') }}
+{% endblock %}

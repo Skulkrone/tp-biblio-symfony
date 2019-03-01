@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des emprunts{% endblock %}
+
+{% block body %}
+    <h2>Liste des emprunts</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre du livre</th>
+                <th>Adhérent</th>
+                <th>Date d'emprunt</th>
+                <th>Date de retour</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emprunt in emprunts %}
+                <tr>
+                    <td style="width: 250px;">{{ emprunt.fklivre.titre }}</td>
+                    <td style="width: 150px;">{{ emprunt.fkadherents.nom }} {{ emprunt.fkadherents.prenom }}</td>
+                    <td style="width: 200px;">{{ emprunt.dateEmprunt ? emprunt.dateEmprunt|date('d M Y H:m:s') : '' }}</td>
+                    <td style="width: 200px;">
+                        <!--Comparaison des dates de restitution avec la date du jour pour savoir si les livres sont restitués ou pas -->
+                        {% if date(emprunt.dateRetour)|date('d M Y H:m:s') < "now"|date('d M Y H:m:s') %}
+                            <span> Non restitué </span>
+                        {% else %}
+                            {{ emprunt.dateRetour ? emprunt.dateRetour|date('d M Y H:m:s') : '' }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('emprunts_show', {'id': emprunt.id}) }}">Afficher</a>
+                        <a href="{{ path('emprunts_edit', {'id': emprunt.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('emprunts_new') }}">Nouvel emprunt</a>
+{% endblock %}

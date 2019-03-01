@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Adhérent{% endblock %}
+
+{% block body %}
+    <h1>Nouvel Adhérent</h1>
+
+    {{ include('adherents/_form.html.twig') }}
+    <div>
+        <a href="{{ path('adherents_index') }}">Retour à la liste</a>
+    </div>
+{% endblock %}

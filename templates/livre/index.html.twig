@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livres disponibles{% endblock %}
+
+{% block body %}
+    <h2>Livres disponibles</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="emprunt">Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for livre in livres %}
+                <tr>
+                    <td class="emprunt">{{ livre.id }}</td>
+                    <td class="emprunter">{{ livre.titre }}</td>
+                    <td class="other">{{ livre.description }}</td>
+                    <td>
+                        <a href="{{ path('livre_show', {'id': livre.id}) }}">Afficher</a>
+                        <a href="{{ path('livre_edit', {'id': livre.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        
+    <div>
+        <a href="{{ path('livre_new') }}">Ajouter un nouveau livre à disposition</a>
+    </div>
+{% endblock %}

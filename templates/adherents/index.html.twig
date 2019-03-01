@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des adherents{% endblock %}
+
+{% block body %}
+    <h2>Liste des adherents</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="emprunt">Id</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for adherent in adherents %}
+                <tr>
+                    <td class="emprunt">{{ adherent.id }}</td>
+                    <td class="emprunter">{{ adherent.nom }}</td>
+                    <td>{{ adherent.prenom }}</td>
+                    <td>
+                        <a href="{{ path('adherents_show', {'id': adherent.id}) }}">Afficher</a>
+                        <a href="{{ path('adherents_edit', {'id': adherent.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        <a href="{{ path('adherents_new') }}">Créer un nouvel adhérent</a>
+    </div>
+{% endblock %}
